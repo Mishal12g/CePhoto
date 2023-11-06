@@ -13,6 +13,7 @@
 		87C15F8E2AF8F987007F5829 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87C15F8C2AF8F987007F5829 /* Main.storyboard */; };
 		87C15F902AF8F988007F5829 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87C15F8F2AF8F988007F5829 /* Assets.xcassets */; };
 		87C15F932AF8F988007F5829 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87C15F912AF8F988007F5829 /* LaunchScreen.storyboard */; };
+		87C15F9C2AF91F42007F5829 /* ImageCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C15F9B2AF91F42007F5829 /* ImageCellTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		87C15F8F2AF8F988007F5829 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		87C15F922AF8F988007F5829 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		87C15F942AF8F988007F5829 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		87C15F9B2AF91F42007F5829 /* ImageCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCellTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +58,24 @@
 		87C15F852AF8F987007F5829 /* CePhoto */ = {
 			isa = PBXGroup;
 			children = (
+				87C15F9A2AF91EF6007F5829 /* Presentation */,
 				87C15F862AF8F987007F5829 /* AppDelegate.swift */,
 				87C15F882AF8F987007F5829 /* SceneDelegate.swift */,
-				87C15F8A2AF8F987007F5829 /* ViewController.swift */,
-				87C15F8C2AF8F987007F5829 /* Main.storyboard */,
 				87C15F8F2AF8F988007F5829 /* Assets.xcassets */,
 				87C15F912AF8F988007F5829 /* LaunchScreen.storyboard */,
 				87C15F942AF8F988007F5829 /* Info.plist */,
 			);
 			path = CePhoto;
+			sourceTree = "<group>";
+		};
+		87C15F9A2AF91EF6007F5829 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				87C15F8A2AF8F987007F5829 /* ViewController.swift */,
+				87C15F8C2AF8F987007F5829 /* Main.storyboard */,
+				87C15F9B2AF91F42007F5829 /* ImageCellTableViewCell.swift */,
+			);
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,6 +150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				87C15F8B2AF8F987007F5829 /* ViewController.swift in Sources */,
+				87C15F9C2AF91F42007F5829 /* ImageCellTableViewCell.swift in Sources */,
 				87C15F872AF8F987007F5829 /* AppDelegate.swift in Sources */,
 				87C15F892AF8F987007F5829 /* SceneDelegate.swift in Sources */,
 			);

@@ -9,7 +9,8 @@ import UIKit
 
 class ViewController: UIViewController {
     //MARK: - Privates properties
-    private var imageView: UIImageView?
+    private var tableView: UITableView?
+    private var photos: [UIImage] = []
     
     //MARK: - Overrides methods
     override func viewDidLoad() {
@@ -20,7 +21,7 @@ class ViewController: UIViewController {
     //MARK: - Privates Methods
     private func settingView() {
         view.backgroundColor = .black
-
+        
         //button
         let takePhotoButton = UIButton()
         
@@ -38,20 +39,23 @@ class ViewController: UIViewController {
             takePhotoButton.widthAnchor.constraint(equalToConstant: 300),
         ])
         
-        //image
-        imageView = UIImageView()
-        guard let image = imageView else { return }
+        //Table
+        tableView = UITableView()
+        guard let tableView = tableView else { return }
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(tableView)
         
-        image.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(image)
-        
-        image.backgroundColor = .white
+        tableView.backgroundColor = .black
+        tableView.separatorStyle = .none
+        tableView.register(ImageCellTableViewCell.self, forCellReuseIdentifier: ImageCellTableViewCell.reuseIdentifier)
         
         NSLayoutConstraint.activate([
-            image.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            image.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            image.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            image.bottomAnchor.constraint(equalTo: takePhotoButton.topAnchor, constant: -20),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: takePhotoButton.topAnchor),
         ])
     }
     
@@ -68,6 +72,23 @@ class ViewController: UIViewController {
     }
 }
 
+//MARK: - UITableViewDelegate
+extension ViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        photos.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: ImageCellTableViewCell.reuseIdentifier, for: indexPath)
+        guard let imageCell = cell as? ImageCellTableViewCell else {
+            return   UITableViewCell()
+        }
+        
+        imageCell.imagePoster.image = photos[indexPath.row]
+        return imageCell
+    }
+}
+
 //MARK: - UIImagePickerControllerDelegate
 extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -77,11 +98,10 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true)
         
-        guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage, let imageView = imageView else {
+        guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {
             return
         }
-        
-        imageView.image = image
-        imageView.contentMode = .scaleAspectFit
+        photos.append(image)
+        tableView?.reloadData()
     }
 }
